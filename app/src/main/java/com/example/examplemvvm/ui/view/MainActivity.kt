@@ -7,7 +7,14 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.examplemvvm.databinding.ActivityMainBinding
 import com.example.examplemvvm.ui.viewModel.QuoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import com.google.android.material.tabs.TabLayout
 
+import android.R
+import android.view.View
+
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -31,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewContainer.setOnClickListener {
             quoteViewModel.randomQuote()
+
         }
     }
 }

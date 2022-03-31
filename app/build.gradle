@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -53,12 +55,24 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'// para usar retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'// para convertir los json en gson
     //Corrutinas
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
+
 
     //--------DEPENDENCIA DE LAS ANIMACIONES
     implementation 'com.airbnb.android:lottie:3.7.0'
 
+    //dagger Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    //Room
+    implementation "androidx.room:room-ktx:2.4.0"
+    kapt "androidx.room:room-compiler:2.4.0"
+
     testImplementation 'junit:junit:4.+'
+    testImplementation "io.mockk:mockk:1.12.2"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }

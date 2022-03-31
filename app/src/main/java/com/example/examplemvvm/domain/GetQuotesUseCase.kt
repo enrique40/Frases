@@ -1,13 +1,30 @@
 package com.example.examplemvvm.domain
 
+import android.util.Log
 import com.example.examplemvvm.data.Model.QuoteModel
 import com.example.examplemvvm.data.QuoteRepository
+import com.example.examplemvvm.data.database.entities.toDatabase
+import com.example.examplemvvm.domain.model.Quote
+import javax.inject.Inject
 
-class GetQuotesUseCase {
+//Este caso de uso solo se llama solo la primera vez es decir cuando abrimos la app
+class GetQuotesUseCase @Inject constructor(private val repository : QuoteRepository){
 
-    private val repository = QuoteRepository()
+    suspend operator fun invoke():List<Quote> {
 
-    suspend operator fun invoke():List<QuoteModel>? = repository.getAllQuotes()
+        val quotes = repository.getAllQuotesFromApi()
+
+        Log.e("quotes", "invoke: ${quotes}")
+
+        return if (quotes.isNotEmpty()){
+            repository.clearQuotes()
+            repository.insertQuotes(quotes.map { it.toDatabase() })
+            quotes
+        }else {
+            repository.getAllQuotesFromDatabase()
+        }
+
+    }
 
 
 }
