@@ -14,7 +14,6 @@ class GetQuotesUseCase @Inject constructor(private val repository : QuoteReposit
 
         val quotes = repository.getAllQuotesFromApi()
 
-        Log.e("quotes", "invoke: ${quotes}")
 
         return if (quotes.isNotEmpty()){
             repository.clearQuotes()
